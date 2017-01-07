@@ -1,0 +1,32 @@
+{
+  "name": "coding-bricks",
+  "version": "0.0.1",
+  "description": "Small app for coding exercises aimed at teenagers with no prior knowlegde",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "watch": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/junedev/coding-bricks.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/junedev/coding-bricks/issues"
+  },
+  "homepage": "https://github.com/junedev/coding-bricks#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "js-yaml": "^3.7.0",
+    "nodemon": "^1.11.0"
+  }
+}
