@@ -8,6 +8,6 @@ app.use(bodyParser.json())
 app.use(express.static('./public'))
 
 app.listen(5555, function (err) {
-  if (err) console.err(err)
+  if (err) return console.err(err)
   console.log('Server listening on port 5555')
 })

@@ -1,0 +1,9 @@
+#drop-area {
+    min-height: 500px;
+}
+
+#drop-area > .brick {
+    max-width: 200px;
+    display: inline-block;
+    margin-right: 10px;
+}

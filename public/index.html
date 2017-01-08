@@ -24,15 +24,9 @@
           </div>
           <div class="panel-body">
 
-            <div class="panel panel-default brick">
+            <div class="panel panel-default brick" data-code-start="puts 8+5">
               <div class="panel-body">
-                Basic panel example
-              </div>
-            </div>
-
-            <div class="panel panel-default brick">
-              <div class="panel-body">
-                Basic panel example
+                Calculate 8+5
               </div>
             </div>
 
@@ -45,8 +39,7 @@
           <div class="panel-heading">
             <h3 class="panel-title">Bodenplatte</h3>
           </div>
-          <div class="panel-body">
-            Panel content
+          <div class="panel-body" id="drop-area">
           </div>
         </div>
       </div>
@@ -58,17 +51,18 @@
             <div class="panel-heading">
               <h3 class="panel-title">Programm</h3>
             </div>
-            <div class="panel-body">
-              Panel content
-            </div>
+            <div class="panel-body" id="program"></div>
           </div>
 
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Ergebnis</h3>
+              <h3 class="panel-title">
+                Ergebnis
+              <button type="button" class="btn btn-primary pull-right" id="run">Start</button>
+              </h3>
             </div>
-            <div class="panel-body">
-              Panel content
+            <div class="panel-body" id="result">
+              
             </div>
           </div>
         </div>
@@ -80,8 +74,9 @@
 
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-    crossorigin="anonymous"></script>-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+  <script src="https://repl.it/lib/api.js" type="text/javascript" charset="utf-8"></script>
   <script src="./client.js"></script>
 </body>
 
