@@ -1,9 +1,9 @@
 $(function () {
-  var token = {
-    "msg_mac": "REPLACEME",
-    "time_created": 0
-  };
-  var repl = new ReplitClient("api.repl.it", 80, "ruby", token);
+
+  var repl;
+  $.get(window.location.origin + '/token', function(token) {
+    repl = new ReplitClient("api.repl.it", 80, "ruby", token);
+  });
 
   $(".brick").draggable({
     revert: "invalid", // when not dropped, the item will revert back to its initial position
