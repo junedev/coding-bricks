@@ -1,3 +1,7 @@
+.container {
+    width: 98%;
+}
+
 #drop-area {
     min-height: 500px;
 }

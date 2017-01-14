@@ -1,9 +1,39 @@
 $(function () {
 
   var repl;
-  $.get(window.location.origin + '/token', function(token) {
+  $.get(window.location.origin + '/token', function (token) {
     repl = new ReplitClient("api.repl.it", 80, "ruby", token);
   });
+
+  var templateNode = $.parseHTML('<div class="panel panel-default brick"><div class="panel-body"></div></div>');
+  function showTask(task) {
+    $('#task').text(task.description);
+    task.elements.forEach(function(e){
+      var node = $(templateNode).clone();
+      node.attr("data-code-start", e.codeStart);
+      node.children().first().text(e.text);
+      $('#bricks').append(node);
+    });
+  }
+
+  // Aufgabe 1, Discount
+  var task1 = {
+    description: "Du programmierst die Kassen von ZARA. Für die nächste Rabattaktion soll es auf alle Produkte 10% Rabatt geben. "
+    + "Zusätzlich gibt es 5 Euro Abzug, wenn der reduzierte Preis über 50 Euro beträgt. "
+    + "Dein Programm bekommt den Originalpreis als Eingabe und soll den reduzierten Preis ausgeben.",
+    elements: [
+      {
+        text: "+",
+        codeStart: "+"
+      },
+      {
+        text: "1",
+        codeStart: "1"
+      }
+    ]
+  }
+
+  showTask(task1);
 
   $(".brick").draggable({
     revert: "invalid", // when not dropped, the item will revert back to its initial position
