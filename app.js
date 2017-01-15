@@ -8,7 +8,7 @@ app.use(bodyParser.json())
 // index page is also included here
 app.use(express.static('./public'))
 
-app.get('/token', function(req, res) {
+app.get('/token', function (req, res) {
   const hmac = crypto.createHmac('sha256', process.env['REPL_SECRET']);
   const created = new Date().getTime()
   hmac.update(created.toString())

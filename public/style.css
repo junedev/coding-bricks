@@ -2,11 +2,11 @@
     width: 98%;
 }
 
-#drop-area {
+#playground {
     min-height: 500px;
 }
 
-#drop-area > .brick {
+#playground > .brick {
     max-width: 200px;
     display: inline-block;
     margin-right: 10px;
