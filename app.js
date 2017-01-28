@@ -9,7 +9,7 @@ app.use(bodyParser.json())
 app.use(express.static('./public'))
 
 app.get('/token', function (req, res) {
-  const hmac = crypto.createHmac('sha256', process.env['REPL_SECRET']);
+  const hmac = crypto.createHmac('sha256', process.env['REPL_SECRET'])
   const created = new Date().getTime()
   hmac.update(created.toString())
   const token = hmac.digest('base64').trim()

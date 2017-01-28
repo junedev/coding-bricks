@@ -12,6 +12,10 @@ $(function () {
       var copy = ui.draggable.clone();
       dropArea.append(copy);
       writeCode();
+      $("input[type='text']").on("input", function() {
+        $(this).parents(".brick").attr("data-code", $(this).val() + " ");
+        writeCode();
+      });
     }
   });
 
@@ -23,7 +27,7 @@ $(function () {
   function writeCode() {
     $('#program').text("");
     $("#playground").children().each(function() {
-      $('#program').append($(this).data("codeStart"));
+      $('#program').append($(this).attr("data-code"));
     });
   }
 
@@ -57,13 +61,25 @@ $(function () {
     cursor: "move"
   };
 
-  var templateNode = $.parseHTML('<div class="panel panel-default brick"><div class="panel-body"></div></div>');
+  var basicNode = $.parseHTML('<div class="panel panel-default brick"><div class="panel-body"></div></div>');
+  var inputNode = $.parseHTML('<div class="panel panel-default brick"><div class="panel-body"><div class="input-group"><input type="text" class="form-control number" placeholder="123"></div></div></div>')
   function showTask(task) {
     $('#task').text(task.description);
     task.elements.forEach(function (e) {
-      var node = $(templateNode).clone();
-      node.attr("data-code-start", e.codeStart);
-      node.children().first().text(e.text);
+      var node
+      if(e.type === 'basic') {
+        node = $(basicNode).clone();
+        node.attr("data-code", e.code);
+        node.children().first().text(e.text);
+      }
+      if(e.type === 'input') {
+        node = $(inputNode).clone();
+      }
+      if(e.type === 'fancy') {
+        node = $(basicNode).clone();
+        node.attr("data-code", e.code);
+        node.children().first().text(e.text);
+      }
       node.draggable(dragOptions);
       $('#bricks').append(node);
     });
@@ -76,16 +92,48 @@ $(function () {
     + "Dein Programm bekommt den Originalpreis als Eingabe und soll den reduzierten Preis ausgeben.",
     elements: [
       {
+        type: "input"
+      },
+      { 
+        type: "basic",
         text: "+",
-        codeStart: "+"
+        code: "+ "
       },
       {
-        text: "1",
-        codeStart: "1"
+        type: "basic",
+        text: "-",
+        code: "- "
       },
       {
+        type: "basic",
+        text: "*",
+        code: "* "
+      },
+      {
+        type: "basic",
+        text: "/",
+        code: "/ "
+      },
+      {
+        type: "basic",
+        text: "<",
+        code: "< "
+      },
+      {
+        type: "basic",
+        text: ">",
+        code: "> "
+      },
+      {
+        type: "fancy",
+        text: "wenn",
+        code: "if ",
+        needsEnd: "true"
+      },
+      {
+        type: "basic",
         text: "Ausgabe:",
-        codeStart: "puts "
+        codet: "puts "
       }
     ]
   }

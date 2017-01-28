@@ -8,6 +8,28 @@
 
 #playground > .brick {
     max-width: 200px;
-    display: inline-block;
+    display: inline-flex;
     margin-right: 10px;
+}
+
+#playground > .brick.large {
+    max-width: none;
+    display: block;
+    margin-right: 10px;
+}
+
+.drop-area.inline {
+    flex-grow: 1;
+}
+
+.well {
+    margin-left: 10px;
+}
+
+.well-wrapper {
+    display: flex;
+}
+
+.well-label {
+    padding-top: 15px;
 }
