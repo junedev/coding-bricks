@@ -5,12 +5,13 @@ $(function () {
     repl = new ReplitClient("api.repl.it", 80, "ruby", token);
   });
 
-  var dropArea = $("#playground");
+  var dropArea = $(".drop-area");
   dropArea.droppable({
     accept: ".brick",
+    greedy: true,
     drop: function (event, ui) {
       var copy = ui.draggable.clone();
-      dropArea.append(copy);
+      $(event.target).append(copy);
       writeCode();
       $("input[type='text']").on("input", function() {
         $(this).parents(".brick").attr("data-code", $(this).val() + " ");
@@ -33,7 +34,8 @@ $(function () {
 
   function runCode(code) {
     repl.evaluateOnce(
-      code, {
+      code, 
+      {
         stdout: function (output) {
           $("#run").blur();
           output.replace(/\n/g, "<br>")

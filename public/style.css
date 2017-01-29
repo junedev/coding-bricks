@@ -6,7 +6,7 @@
     min-height: 500px;
 }
 
-#playground > .brick {
+#playground .brick {
     max-width: 200px;
     display: inline-flex;
     margin-right: 10px;
@@ -18,11 +18,12 @@
     margin-right: 10px;
 }
 
-.drop-area.inline {
-    flex-grow: 1;
+.well .panel {
+    margin-bottom: 0px;
 }
 
-.well {
+.well.inline {
+    flex-grow: 1;
     margin-left: 10px;
 }
 
@@ -31,5 +32,5 @@
 }
 
 .well-label {
-    padding-top: 15px;
+    padding-top: 10px;
 }
