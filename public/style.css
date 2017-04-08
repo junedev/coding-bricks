@@ -18,6 +18,18 @@
     margin-right: 10px;
 }
 
+.brick > .panel-body {
+    min-width: 200px;
+}
+
+/*.brick.small-brick {
+    max-width: 40%;
+}
+
+.brick.small-brick > .panel-body {
+    max-width: 40%;
+}*/
+
 .well .panel {
     margin-bottom: 0px;
 }
@@ -25,6 +37,7 @@
 .well.inline {
     flex-grow: 1;
     margin-left: 10px;
+    min-height: 60px;
 }
 
 .well-wrapper {
@@ -32,5 +45,26 @@
 }
 
 .well-label {
-    padding-top: 10px;
+    padding-top: 15px;
+}
+
+.invisible {
+    display: none;
+}
+
+#program {
+    min-height: 60px;
+    background: black;
+    color: seagreen;
+    font-weight: bold;
+}
+
+.glyphicon-ok {
+    color: seagreen;
+    font-size: 2em;
+}
+
+.glyphicon-remove {
+    color: firebrick;
+    font-size: 2em;
 }
