@@ -2,30 +2,57 @@
     width: 98%;
 }
 
+#bricks .list-group-item {
+    margin-bottom: 10px;
+}
+
 #playground {
     min-height: 500px;
 }
 
 #playground .brick {
-    max-width: 200px;
-    display: inline-flex;
+    max-width: 220px;
     margin-right: 10px;
+    margin-bottom: 0px;
 }
 
-#playground > .brick.large {
+#playground .input-group {
+    display: inline-flex;
+}
+
+#playground .brick {
+    display: inline-block;
+}
+
+#playground  .brick.large {
     max-width: none;
     display: block;
     margin-right: 10px;
 }
 
-.brick > .panel-body {
-    min-width: 200px;
+#playground  .brick.large .panel-body {
+    padding-bottom: 0px;
 }
+
+#playground.panel-body {
+    margin: 0px;
+    padding: 0px;
+}
+
+/*.brick > .panel-body {
+    min-width: 200px;
+}*/
 
 /*.brick.small-brick {
-    max-width: 40%;
+    max-width: 108px;
 }
 
+#bricks .brick.small-brick {
+    display: inline-block;
+    margin-right: 10px;
+}*/
+
+/*
 .brick.small-brick > .panel-body {
     max-width: 40%;
 }*/
@@ -34,7 +61,12 @@
     margin-bottom: 0px;
 }
 
+#playground .list-group-item.drop-area {
+    min-height: 70px;
+}
+
 .well.inline {
+    background-color: white;
     flex-grow: 1;
     margin-left: 10px;
     min-height: 60px;
@@ -67,4 +99,43 @@
 .glyphicon-remove {
     color: firebrick;
     font-size: 2em;
+}
+
+.glyphicon-trash {
+    padding-left: 10px;
+    color: lightgrey;
+    position: absolute;
+    margin-top: 29px;
+    bottom: 0;
+    right: 0;
+}
+
+#bricks .glyphicon-trash {
+    display: none;
+}
+
+.var-name {
+    max-width: 70px;
+}
+
+.number {
+    max-width: 100px;
+}
+
+#playground .var-name {
+    margin: 0px 5px;
+    max-width: 70px;
+}
+
+.var-name-group {
+    display: inline-flex;
+}
+
+#bricks p, #playground p {
+    margin: 0px;
+}
+
+.brick {
+    background-color: #e0ecf7;
+    border-color: white;
 }

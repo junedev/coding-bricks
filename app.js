@@ -1,5 +1,6 @@
 const express = require('express')
 const crypto = require('crypto')
+const childProcess = require('child_process')
 const bodyParser = require('body-parser')
 
 const app = express()
@@ -14,6 +15,16 @@ app.get('/token', function (req, res) {
   hmac.update(created.toString())
   const token = hmac.digest('base64').trim()
   res.json({msg_mac: token, time_created: created})
+})
+
+app.post('/evaluate', function (req, res) {
+  console.log(`ruby -e ${req.body.code}`)
+  childProcess.exec(`ruby -e '${req.body.code}'`, function (err, output, error) {
+    if (err) {
+      error = err
+    }
+    res.json({output: output.slice(0, -1), error})
+  })
 })
 
 app.listen(5555, function (err) {
