@@ -104,41 +104,36 @@ $(function () {
     cursor: 'move'
   }
 
-  var testNode = $.parseHTML('<div class="panel panel-default"><div class="panel-body"><p><span class="text"></span><button type="button" class="btn btn-primary btn-sm pull-right start"><span class="glyphicon glyphicon-play"></span></button></p><p></p></div></div>')
-
-  var basicNode = $.parseHTML('<li class="list-group-item brick small-brick"><span class="glyphicon glyphicon-trash pull-right"></span></li>')
-  var inputNode = $.parseHTML('<li class="list-group-item brick"><div class="input-group"><input type="text" class="form-control number" placeholder="123 / abc"></div><span class="glyphicon glyphicon-trash pull-right"></span></li>')
-  var assignment = $.parseHTML('<li class="list-group-item brick">Speichern als <div class="input-group var-name-group"><input type="text" class="form-control var-name" placeholder="abc"><div class="invisible" data-code=" = "></div></div> :<span class="glyphicon glyphicon-trash pull-right"></span></li>')
-  var conditional = $.parseHTML('<li class="list-group-item brick large"><div class="well-wrapper"><div class="well-label" data-code="if ">wenn</div>' +
-    '<div class="well drop-area inline"></div></div><div class="well-wrapper"><div class="well-label" data-code="<br>">dann</div> <div class="invisible" data-code="  "></div><div class="well drop-area inline"></div>' +
-    '<div class="invisible" data-code="<br>end"></div></div></div><span class="glyphicon glyphicon-trash pull-right"></span></li>')
-
   function showTask (task) {
     $('#task').text(task.description)
     task.elements.forEach(function (e) {
       var node
       if (e.type === 'basic') {
-        node = $(basicNode).clone()
+        node = $('#basicNode').clone()
+        node.attr("id", "")
         node.attr('data-code', e.code)
         node.prepend(e.text)
       }
       if (e.type === 'input') {
-        node = $(inputNode).clone()
+        node = $('#inputNode').clone()
+        node.attr("id", "")
       }
       if (e.type === 'conditional') {
-        node = $(conditional).clone()
+        node = $('#conditional').clone()
+        node.attr("id", "")
       }
       if (e.type === 'assignment') {
-        node = $(assignment).clone()
+        node = $('#assignment').clone()
+        node.attr("id", "")
       // use input value as name for variable
       }
       node.draggable(dragOptions)
       $('#bricks-list').append(node)
     })
     task.tests.forEach(function (e) {
-      node = $(testNode).clone()
+      node = $('#testNode').clone()
       $(node.find('p span.text')[0]).text('Eingabe: ' + e.input).attr('data-input', e.input)
-      $(node.find('p')[1]).text('Ausgabe: ').attr('data-expected', e.expected)
+      $(node.find('p.out')).text('Ausgabe: ').attr('data-expected', e.expected)
       $('#tests').append(node)
     })
   }

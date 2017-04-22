@@ -5,8 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./style.css">
   <title>Programmier-Lego</title>
@@ -23,8 +22,8 @@
             <h3 class="panel-title">Bausteine</h3>
           </div>
           <div class="panel-body" id="bricks">
-             <ul class="list-group" id="bricks-list">
-             </ul>
+            <ul class="list-group" id="bricks-list">
+            </ul>
           </div>
         </div>
       </div>
@@ -85,11 +84,48 @@
 
   </div>
 
-  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-    crossorigin="anonymous"></script>
-  <script src="https://repl.it/lib/api.js" type="text/javascript" charset="utf-8"></script>
+  <div class="invisible">
+
+    <div class="panel panel-default" id="testNode">
+      <div class="panel-body">
+        <p><span class="text"></span><button type="button" class="btn btn-primary btn-sm pull-right start"><span class="glyphicon glyphicon-play"></span></button></p>
+        <p class="out"></p>
+      </div>
+    </div>
+
+    <li class="list-group-item brick small-brick" id="basicNode"><span class="glyphicon glyphicon-trash pull-right"></span></li>
+
+    <li class="list-group-item brick" id="inputNode">
+      <div class="input-group"><input type="text" class="form-control number" placeholder="123 / abc"></div>
+      <span class="glyphicon glyphicon-trash pull-right"></span>
+    </li>
+
+    <li class="list-group-item brick" id="assignment">Speichern als
+      <div class="input-group var-name-group"><input type="text" class="form-control var-name" placeholder="abc">
+        <div class="invisible" data-code=" = "></div>
+      </div> :<span class="glyphicon glyphicon-trash pull-right"></span>
+    </li>
+
+    <li class="list-group-item brick large" id="conditional">
+      <div class="well-wrapper">
+        <div class="well-label" data-code="if ">wenn</div>
+        <div class="well drop-area inline"></div>
+      </div>
+      <div class="well-wrapper">
+        <div class="well-label" data-code="<br>">dann</div>
+        <div class="invisible" data-code="  "></div>
+        <div class="well drop-area inline"></div>
+        <div class="invisible" data-code="<br>end"></div>
+      </div>
+      <span class="glyphicon glyphicon-trash pull-right"></span>
+    </li>
+
+  </div>
+
+  <script type="text/javascript" src="./vendor/jquery-1.12.4.js"></script>
+  <script type="text/javascript" src="./vendor/jquery-ui.js"></script>
+  <script type="text/javascript" src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./vendor/repl-api.js" charset="utf-8"></script>
   <script type="text/javascript" src="./client.js"></script>
 </body>
 
