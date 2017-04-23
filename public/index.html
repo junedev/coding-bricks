@@ -88,7 +88,7 @@
 
     <div class="panel panel-default" id="testNode">
       <div class="panel-body">
-        <p><span class="text"></span><button type="button" class="btn btn-primary btn-sm pull-right start"><span class="glyphicon glyphicon-play"></span></button></p>
+        <p><span class="text"></span></p>
         <p class="out"></p>
       </div>
     </div>
@@ -127,6 +127,22 @@
   <script type="text/javascript" src="./vendor/bootstrap/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="./vendor/repl-api.js" charset="utf-8"></script>
   <script type="text/javascript" src="./client.js"></script>
+
+  <!-- Modal -->
+  <div class="modal fade" id="nextTask" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+          <h4 class="modal-title" id="nextTask">Super, ihr habt die Aufgabe gelöst!</h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Schließen</button>
+          <button type="button" class="btn btn-primary next" onclick="showNextTask()">Nächste Aufgabe</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

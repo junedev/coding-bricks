@@ -4,6 +4,8 @@ $(function () {
   //   repl = new ReplitClient('api.repl.it', 80, 'ruby', token)
   // })
 
+  var numberOfTests = 0
+
   var dropOptions = {
     accept: '.brick',
     greedy: true,
@@ -42,11 +44,11 @@ $(function () {
     }
   }
 
-  var correct = '<span class="glyphicon glyphicon-ok pull-right"></span>'
+  var correct = '<span class="glyphicon glyphicon-ok pull-right correct"></span>'
   var wrong = '<span class="glyphicon glyphicon-remove pull-right"></span>'
 
   function runCode (code, node) {
-    console.log(code)
+    //console.log(code)
     $.ajax({
       url: '/evaluate',
       contentType: 'application/json',
@@ -82,16 +84,19 @@ $(function () {
 
   function addResult (output, node) {
     $('.start').blur()
-    if(output) output.replace(/\n/g, '<br>')
+    if (output) output.replace(/\n/g, '<br>')
     let expected = node.attr('data-expected')
     node.html('Ausgabe: ')
     node.append(output)
-    if(!isNaN(expected)) expected = parseFloat(expected)
-    if(!isNaN(output)) output = parseFloat(output)
+    if (!isNaN(expected)) expected = parseFloat(expected)
+    if (!isNaN(output)) output = parseFloat(output)
     if (expected == output) {
       node.append(correct)
     } else {
       node.append(wrong)
+    }
+    if ($('.correct').length === numberOfTests) {
+      $('#nextTask').modal()
     }
   }
 
@@ -110,21 +115,21 @@ $(function () {
       var node
       if (e.type === 'basic') {
         node = $('#basicNode').clone()
-        node.attr("id", "")
+        node.attr('id', '')
         node.attr('data-code', e.code)
         node.prepend(e.text)
       }
       if (e.type === 'input') {
         node = $('#inputNode').clone()
-        node.attr("id", "")
+        node.attr('id', '')
       }
       if (e.type === 'conditional') {
         node = $('#conditional').clone()
-        node.attr("id", "")
+        node.attr('id', '')
       }
       if (e.type === 'assignment') {
         node = $('#assignment').clone()
-        node.attr("id", "")
+        node.attr('id', '')
       // use input value as name for variable
       }
       node.draggable(dragOptions)
@@ -132,10 +137,14 @@ $(function () {
     })
     task.tests.forEach(function (e) {
       node = $('#testNode').clone()
+      node.attr('id', '')
+      node.addClass('test')
       $(node.find('p span.text')[0]).text('Eingabe: ' + e.input).attr('data-input', e.input)
       $(node.find('p.out')).text('Ausgabe: ').attr('data-expected', e.expected)
       $('#tests').append(node)
     })
+
+    $('#tests').append('<button type="button" class="btn btn-primary btn-large pull-right start"><span class="glyphicon glyphicon-play"></span></button>')
   }
 
   function decode (encodedString) {
@@ -144,79 +153,34 @@ $(function () {
     return textArea.value
   }
 
-  // Aufgabe 1, Discount
-  var task1 = {
-    description: 'Du programmierst die App für ZARA. Für die nächste Rabattaktion soll es auf alle Produkte 10% Rabatt geben. '
-      + 'Zusätzlich gibt es 5 Euro Abzug, wenn der reduzierte Preis über 50 Euro beträgt. '
-      + 'Dein Programm bekommt den Originalpreis als Eingabe und soll den reduzierten Preis ausgeben.',
-    tests: [
-      { input: 10, expected: 9 },
-      { input: 20, expected: 18 },
-      { input: 100, expected: 85 },
-      { input: 50, expected: 45 }
-    ],
-    elements: [
-      {
-        type: 'basic',
-        text: 'Ausgabe:',
-        code: 'puts '
-      },
-      {
-        type: 'basic',
-        text: 'Eingabe',
-        code: 'input '
-      },
-      {
-        type: 'basic',
-        text: '+',
-        code: '+ '
-      },
-      {
-        type: 'basic',
-        text: '-',
-        code: '- '
-      },
-      {
-        type: 'basic',
-        text: '*',
-        code: '* '
-      },
-      {
-        type: 'basic',
-        text: '/',
-        code: '/ '
-      },
-      {
-        type: 'basic',
-        text: '<',
-        code: '< '
-      },
-      {
-        type: 'basic',
-        text: '>',
-        code: '> '
-      },
-      {
-        type: 'assignment'
-      },
-    {
-      type: 'input'
-    },
-    {
-      type: 'conditional'
-    }
-    ]
+  var taskNumber = localStorage.getItem('taskNumber')
+  if (!taskNumber) {
+    localStorage.setItem('taskNumber', 1)
+    taskNumber = 1
   }
 
-  showTask(task1)
+  $.get('/' + taskNumber)
+    .done(function (task) {
+      showTask(task)
+      $('.start').on('click', function (e) {
+        var tests = $('.test')
+        numberOfTests = tests.length
+        console.log(numberOfTests)
+        tests.each(function (test) {
+          var input = $(this).find('.text').attr('data-input')
+          var resultNode = $(this).find('.out')
+          e.preventDefault()
+          var code = 'input = ' + input + '\n' + $('#program').html().replace(/<br>/g, '\n')
+          code = decode(code.replace(/\n*$/g, ''))
+          runCode(code, resultNode)
+        })
+      })
+    })
 
-  $('.start').on('click', function (e) {
-    var input = $(e.currentTarget).prev().attr('data-input')
-    var resultNode = $(e.currentTarget).parent().next()
-    e.preventDefault()
-    var code = 'input = ' + input + '\n' + $('#program').html().replace(/<br>/g, '\n')
-    code = decode(code.replace(/\n*$/g, ''))
-    console.log(code)
-    runCode(code, resultNode)
-  })
 })
+
+  function showNextTask() {
+    var currentTaskNumber = localStorage.getItem('taskNumber')
+    localStorage.setItem('taskNumber', Number(currentTaskNumber) + 1)
+    location.reload()
+  }
