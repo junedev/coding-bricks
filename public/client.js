@@ -15,7 +15,9 @@ $(function () {
       event.stopPropagation()
       writeCode()
       $("input[type='text']").on('input', function () {
-        $(this).attr('data-code', $(this).val() + ' ')
+        var value = $(this).val()
+        if(isNaN(value)) value = '"' + value + '"'
+        $(this).attr('data-code', value + ' ')
         writeCode()
       })
       $('.drop-area').droppable(dropOptions)
@@ -48,7 +50,6 @@ $(function () {
   var wrong = '<span class="glyphicon glyphicon-remove pull-right"></span>'
 
   function runCode (code, node) {
-    //console.log(code)
     $.ajax({
       url: '/evaluate',
       contentType: 'application/json',
@@ -56,6 +57,7 @@ $(function () {
       data: JSON.stringify({code: code})
     })
       .done(function (data) {
+        console.log(data)
         addResult(data.output || data.error, node)
       })
   }
@@ -84,6 +86,7 @@ $(function () {
 
   function addResult (output, node) {
     $('.start').blur()
+    if (output && typeof output !== 'string') output = 'Fehler'
     if (output) output.replace(/\n/g, '<br>')
     let expected = node.attr('data-expected')
     node.html('Ausgabe: ')
@@ -170,8 +173,8 @@ $(function () {
           var input = $(this).find('.text').attr('data-input')
           var resultNode = $(this).find('.out')
           e.preventDefault()
-          var code = 'input = ' + input + '\n' + $('#program').html().replace(/<br>/g, '\n')
-          code = decode(code.replace(/\n*$/g, ''))
+          var code = 'input = ' + input + ';' + $('#program').html().replace(/<br>/g, '; ')
+          code = decode(code.replace(/[\n|(; )]*$/g, ''))
           runCode(code, resultNode)
         })
       })
