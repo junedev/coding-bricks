@@ -97,6 +97,7 @@ $(function () {
     if (output) output.replace(/\n/g, '<br>')
     let expected = node.attr('data-expected')
     node.html('Ausgabe: ')
+    if(output.startsWith('Fehler')) output = '<span class="red">' + output + '</span>'
     node.append(output)
     if (!isNaN(expected)) expected = parseFloat(expected)
     if (!isNaN(output)) output = parseFloat(output)
@@ -180,7 +181,6 @@ $(function () {
       $('.start').on('click', function (e) {
         var tests = $('.test')
         numberOfTests = tests.length
-        console.log(numberOfTests)
         tests.each(function (test) {
           var input = $(this).find('.text').attr('data-input')
           var resultNode = $(this).find('.out')

@@ -157,3 +157,7 @@
 .start {
     width: 100%;
 }
+
+.red {
+    color: firebrick;
+}

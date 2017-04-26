@@ -25,10 +25,8 @@ app.get('/:taskId', function (req, res) {
 app.post('/evaluate', function (req, res) {
   console.log(`ruby -e ${req.body.code}`)
   childProcess.exec(`ruby -e '${req.body.code}'`, function (err, output, error) {
-    console.log(err, error, output)
-    if (err) {
-      error = err
-    }
+    if (!error) error = err
+    if (error) error = 'Fehler ' + error
     res.json({output: output.slice(0, -1), error})
   })
 })
