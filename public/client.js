@@ -16,7 +16,10 @@ $(function () {
       writeCode()
       $("input[type='text']").on('input', function () {
         var value = $(this).val()
-        if(isNaN(value)) value = '"' + value + '"'
+        var hasAssignment = !!$('.var-name').toArray().find(function(e){
+          return $(e).val() === value
+        })
+        if(isNaN(value) && !hasAssignment) value = '"' + value + '"'
         $(this).attr('data-code', value + ' ')
         writeCode()
       })
@@ -35,13 +38,17 @@ $(function () {
   function writeCode () {
     $('#program').text('')
     $('#playground').children().each(write)
+    const program = $('#program').html().replace(/(<br>)*$/, '').replace(/\s.end_with/g, '.end_with')
+    $('#program').text('')
+    console.log(program)
+    $('#program').append(program)
   }
 
   function write (i, e) {
     if ($(e).attr('data-code')) {
       $('#program').append($(e).attr('data-code'))
     }
-    if ($(e).children().length > 0) {
+    if ($(e).children().length) {
       $(e).children().each(write)
     }
   }
@@ -126,6 +133,10 @@ $(function () {
         node = $('#inputNode').clone()
         node.attr('id', '')
       }
+      if (e.type === 'ends') {
+        node = $('#ends').clone()
+        node.attr('id', '')
+      }
       if (e.type === 'conditional') {
         node = $('#conditional').clone()
         node.attr('id', '')
@@ -142,7 +153,8 @@ $(function () {
       node = $('#testNode').clone()
       node.attr('id', '')
       node.addClass('test')
-      $(node.find('p span.text')[0]).text('Eingabe: ' + e.input).attr('data-input', e.input)
+      var input = typeof e.input === 'string' ? e.input.replace(/"/g, '') : e.input
+      $(node.find('p span.text')[0]).text('Eingabe: ' + input).attr('data-input', e.input)
       $(node.find('p.out')).text('Ausgabe: ').attr('data-expected', e.expected)
       $('#tests').append(node)
     })

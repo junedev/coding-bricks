@@ -65,11 +65,21 @@
     min-height: 70px;
 }
 
-.well.inline {
+#playground .well.inline {
     background-color: white;
     flex-grow: 1;
     margin-left: 10px;
     min-height: 60px;
+    margin-right: 5px;
+}
+
+#bricks .well.inline {
+    background-color: white;
+    flex-grow: 1;
+    margin-left: 10px;
+    min-height: 40px;
+    margin-bottom: 5px;
+    margin-right: 5px;
 }
 
 .well-wrapper {
