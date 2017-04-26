@@ -9,7 +9,7 @@ module.exports = [
       { input: '""', expected: 'Hallo !' }
     ],
     elements: [
-      {type: 'basic', text: 'Ausgabe:', code: 'puts '},
+      {type: 'basic', text: 'Ausgabe :', code: 'puts '},
       {type: 'basic', text: 'Eingabe', code: 'input '},
       {type: 'basic', text: '+', code: '+ '},
       {type: 'basic', text: '-', code: '- '},
@@ -25,7 +25,7 @@ module.exports = [
       { input: 100, expected: 80 }
     ],
     elements: [
-      {type: 'basic', text: 'Ausgabe:', code: 'puts '},
+      {type: 'basic', text: 'Ausgabe :', code: 'puts '},
       {type: 'basic', text: 'Eingabe', code: 'input '},
       {type: 'input'},
       {type: 'basic', text: '+', code: '+ '},
@@ -48,7 +48,7 @@ module.exports = [
       { input: 50, expected: 45 }
     ],
     elements: [
-      {type: 'basic', text: 'Ausgabe:', code: 'puts '},
+      {type: 'basic', text: 'Ausgabe :', code: 'puts '},
       {type: 'basic', text: 'Eingabe', code: 'input '},
       {type: 'assignment'},
       {type: 'input'},
@@ -61,7 +61,8 @@ module.exports = [
       {type: 'basic', text: ')', code: ')'},
       {type: 'basic', text: '<', code: '< '},
       {type: 'basic', text: '>', code: '> '},
-      {type: 'basic', text: '=', code: '== '}
+      {type: 'basic', text: '=', code: '== '},
+      {type: 'basic', text: '=', code: '!= '}
     ]
   },
   {
@@ -75,15 +76,47 @@ module.exports = [
       { input: '"Übung macht den Meister"', expected: 'Mir doch egal.' }
     ],
     elements: [
-      {type: 'basic', text: 'Ausgabe:', code: 'puts '},
+      {type: 'basic', text: 'Ausgabe :', code: 'puts '},
       {type: 'basic', text: 'Eingabe', code: 'input '},
+      {type: 'basic', text: 'beginnt mit', code: '.start_with? '},
+      {type: 'basic', text: 'endet mit', code: '.end_with? '},
       {type: 'input'},
       {type: 'assignment'},
       {type: 'conditional'},
-      {type: 'ends'},
+      {type: 'basic', text: 'und', code: '&& '},
+      {type: 'basic', text: 'oder', code: '|| '}
+    ]
+  },
+  {
+    description: 'Aufgabe 5: Für eine Kalender App musst du berechnen, ob ein bestimmtes Jahr ein Schaltjahr ist. Dein Programm soll "ja" oder "nein" ausgeben.' +
+      'Ein Jahr ist ein Schaltjahr, wenn es durch 4 teilbar ist, außer es ist auch noch durch 100 teilbar, sofern es nicht auch noch durch 400 teilbar ist.',
+    tests: [
+      { input: 1996, expected: 'ja' },
+      { input: 1997, expected: 'nein' },
+      { input: 1900, expected: 'nein' },
+      { input: 2400, expected: 'ja' }
+    ],
+    elements: [
+      {type: 'basic', text: 'Ausgabe :', code: 'puts '},
+      {type: 'basic', text: 'Eingabe', code: 'input '},
+      {type: 'basic', text: 'beginnt mit', code: '.start_with? '},
+      {type: 'basic', text: 'endet mit', code: '.end_with? '},
+      {type: 'input'},
+      {type: 'assignment'},
+      {type: 'conditional'},
+      {type: 'basic', text: 'und', code: '&& '},
+      {type: 'basic', text: 'oder', code: '|| '},
       {type: 'basic', text: '+', code: '+ '},
+      {type: 'basic', text: '-', code: '- '},
+      {type: 'basic', text: '*', code: '* '},
+      {type: 'basic', text: '/', code: '/ '},
+      {type: 'basic', text: 'mod', code: '% '},
+      {type: 'basic', text: '(', code: '( '},
+      {type: 'basic', text: ')', code: ')'},
       {type: 'basic', text: '<', code: '< '},
-      {type: 'basic', text: '>', code: '> '}
+      {type: 'basic', text: '>', code: '> '},
+      {type: 'basic', text: '=', code: '== '},
+      {type: 'basic', text: '\u2260', code: '!= '}
     ]
   }
 ]

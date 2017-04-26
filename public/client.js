@@ -38,7 +38,7 @@ $(function () {
   function writeCode () {
     $('#program').text('')
     $('#playground').children().each(write)
-    const program = $('#program').html().replace(/(<br>)*$/, '').replace(/\s.end_with/g, '.end_with')
+    const program = $('#program').html().replace(/(<br>)*$/, '').replace(/\s\.end_with/g, '.end_with').replace(/\s\.start_with/g, '.start_with').replace(/_with\?\s"(.*?)"/g, '_with?\("$1"\)')
     $('#program').text('')
     console.log(program)
     $('#program').append(program)
@@ -186,7 +186,7 @@ $(function () {
           var resultNode = $(this).find('.out')
           e.preventDefault()
           var code = 'input = ' + input + ';' + $('#program').html().replace(/<br>/g, '; ')
-          code = decode(code.replace(/[\n|(; )]*$/g, ''))
+          code = decode(code.replace(/\n*$/g, '').replace(/;\s/g, ''))
           runCode(code, resultNode)
         })
       })

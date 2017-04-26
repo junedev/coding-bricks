@@ -71,6 +71,8 @@
     margin-left: 10px;
     min-height: 60px;
     margin-right: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
 }
 
 #bricks .well.inline {
@@ -129,7 +131,9 @@
 }
 
 .number {
-    max-width: 100px;
+    max-width: 112px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 #playground .var-name {
